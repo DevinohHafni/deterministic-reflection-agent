@@ -1,0 +1,10 @@
+#Daily Reflection Tree Agent — dependencies
+#Python 3.10+ required (uses str | None union syntax)
+# No third-party packages needed — stdlib only.
+#
+# If you want to run on Python 3.9 or below, replace
+# "str | None" with "Optional[str]" and add:
+#   from typing import Optional
+#
+# To run:
+#   python agent.py ../tree/reflection-tree.json
