@@ -1,0 +1,305 @@
+[
+  {
+    "id": "START",
+    "type": "start",
+    "text": "Welcome. Let’s reflect on your workday."
+  },
+
+  {
+    "id": "OPEN_Q",
+    "parentId": "START",
+    "type": "question",
+    "text": "How was your workday overall?",
+    "options": ["Productive", "Frustrating", "Neutral", "Mixed"],
+    "next": "A1_Q1"
+  },
+
+  // ================= AXIS 1 =================
+
+  {
+    "id": "A1_Q1",
+    "parentId": "OPEN_Q",
+    "type": "question",
+    "text": "A task didn’t go as planned. What was your first reaction?",
+    "options": [
+      "I reviewed what I could have done differently",
+      "I thought the expectations were unclear",
+      "I felt external factors made it difficult",
+      "I moved on quickly without overthinking"
+    ],
+    "signal": [
+      "axis1:internal+2",
+      "axis1:external+1",
+      "axis1:external+2",
+      "axis1:internal+1"
+    ],
+    "next": "A1_D1"
+  },
+
+  {
+    "id": "A1_D1",
+    "type": "decision",
+    "parentId": "A1_Q1",
+    "logic": "if axis1_internal >= axis1_external then A1_Q2 else A1_REF1"
+  },
+
+  {
+    "id": "A1_REF1",
+    "parentId": "A1_D1",
+    "type": "reflection",
+    "text": "It seems external factors stand out to you. Do you often feel outcomes are influenced more by circumstances than your actions?",
+    "next": "A1_Q2"
+  },
+
+  {
+    "id": "A1_Q2",
+    "parentId": "A1_D1",
+    "type": "question",
+    "text": "When deadlines get tight, what do you usually do?",
+    "options": [
+      "Adjust strategy and push through",
+      "Ask for help or clarification",
+      "Wait for things to stabilize",
+      "Accept that it may not work out"
+    ],
+    "signal": [
+      "axis1:internal+2",
+      "axis1:external+1",
+      "axis1:external+2",
+      "axis1:external+2"
+    ],
+    "next": "A1_REF2"
+  },
+
+  {
+    "id": "A1_REF2",
+    "parentId": "A1_Q2",
+    "type": "reflection",
+    "text": "Your responses suggest a {axis1_style} approach to control in your work."
+  },
+
+  {
+    "id": "BRIDGE_1_2",
+    "parentId": "A1_REF2",
+    "type": "bridge",
+    "text": "Let’s look at how you approach learning and challenges.",
+    "next": "A2_Q1"
+  },
+
+  // ================= AXIS 2 =================
+
+  {
+    "id": "A2_Q1",
+    "parentId": "BRIDGE_1_2",
+    "type": "question",
+    "text": "You’re given a completely new task. What’s your instinct?",
+    "options": [
+      "Break it down and experiment",
+      "Look for examples first",
+      "Feel unsure about handling it",
+      "Hope someone else takes it"
+    ],
+    "signal": [
+      "axis2:growth+2",
+      "axis2:growth+1",
+      "axis2:fixed+2",
+      "axis2:fixed+2"
+    ],
+    "next": "A2_D1"
+  },
+
+  {
+    "id": "A2_D1",
+    "type": "decision",
+    "parentId": "A2_Q1",
+    "logic": "if axis2_growth >= axis2_fixed then A2_Q2 else A2_REF1"
+  },
+
+  {
+    "id": "A2_REF1",
+    "parentId": "A2_D1",
+    "type": "reflection",
+    "text": "It seems uncertainty affects your confidence. Do you prefer familiar tasks?",
+    "next": "A2_Q2"
+  },
+
+  {
+    "id": "A2_Q2",
+    "parentId": "A2_D1",
+    "type": "question",
+    "text": "How do you react to critical feedback?",
+    "options": [
+      "Use it to improve",
+      "Accept but feel discouraged",
+      "Question its fairness",
+      "Feel it reflects my ability"
+    ],
+    "signal": [
+      "axis2:growth+2",
+      "axis2:fixed+1",
+      "axis2:fixed+1",
+      "axis2:fixed+2"
+    ],
+    "next": "A2_REF2"
+  },
+
+  {
+    "id": "A2_REF2",
+    "parentId": "A2_Q2",
+    "type": "reflection",
+    "text": "Your responses indicate a {axis2_style} learning mindset."
+  },
+
+  {
+    "id": "BRIDGE_2_3",
+    "parentId": "A2_REF2",
+    "type": "bridge",
+    "text": "Now let’s explore how you interact with others at work.",
+    "next": "A3_Q1"
+  },
+
+  // ================= AXIS 3 =================
+
+  {
+    "id": "A3_Q1",
+    "parentId": "BRIDGE_2_3",
+    "type": "question",
+    "text": "A teammate is struggling. What do you do?",
+    "options": [
+      "Help immediately",
+      "Help if time permits",
+      "Wait for them to ask",
+      "Focus on my own tasks"
+    ],
+    "signal": [
+      "axis3:ocb_high+2",
+      "axis3:ocb_mid+1",
+      "axis3:ocb_mid+1",
+      "axis3:ocb_low+2"
+    ],
+    "next": "A3_D1"
+  },
+
+  {
+    "id": "A3_D1",
+    "type": "decision",
+    "parentId": "A3_Q1",
+    "logic": "if axis3_ocb_high >= axis3_ocb_low then A3_Q2 else A3_REF1"
+  },
+
+  {
+    "id": "A3_REF1",
+    "parentId": "A3_D1",
+    "type": "reflection",
+    "text": "You seem to prioritize defined responsibilities over extra-role actions.",
+    "next": "A3_Q2"
+  },
+
+  {
+    "id": "A3_Q2",
+    "parentId": "A3_D1",
+    "type": "question",
+    "text": "You notice an issue outside your role. What do you do?",
+    "options": [
+      "Fix it proactively",
+      "Report it",
+      "Ignore it",
+      "Wait for direction"
+    ],
+    "signal": [
+      "axis3:ocb_high+2",
+      "axis3:ocb_mid+1",
+      "axis3:ocb_low+2",
+      "axis3:ocb_low+1"
+    ],
+    "next": "A3_REF2"
+  },
+
+  {
+    "id": "A3_REF2",
+    "parentId": "A3_Q2",
+    "type": "reflection",
+    "text": "Your behavior reflects a {axis3_style} level of team contribution."
+  },
+
+  // ================= AXIS 4 =================
+
+  {
+    "id": "A4_Q1",
+    "parentId": "A3_REF2",
+    "type": "question",
+    "text": "A decision benefits you but slightly harms your team. What do you choose?",
+    "options": [
+      "Prioritize the team",
+      "Balance both",
+      "Prioritize myself",
+      "Avoid deciding"
+    ],
+    "signal": [
+      "axis4:high+2",
+      "axis4:mid+1",
+      "axis4:low+2",
+      "axis4:low+1"
+    ],
+    "next": "A4_D1"
+  },
+
+  {
+    "id": "A4_D1",
+    "type": "decision",
+    "parentId": "A4_Q1",
+    "logic": "if axis4_high >= axis4_low then A4_Q2 else A4_REF1"
+  },
+
+  {
+    "id": "A4_REF1",
+    "parentId": "A4_D1",
+    "type": "reflection",
+    "text": "You tend to prioritize personal outcomes in decision-making.",
+    "next": "A4_Q2"
+  },
+
+  {
+    "id": "A4_Q2",
+    "parentId": "A4_D1",
+    "type": "question",
+    "text": "How do you handle recognition for success?",
+    "options": [
+      "Share credit",
+      "Take partial credit",
+      "Take full credit",
+      "Let others take it"
+    ],
+    "signal": [
+      "axis4:high+2",
+      "axis4:mid+1",
+      "axis4:low+2",
+      "axis4:high+1"
+    ],
+    "next": "A4_REF2"
+  },
+
+  {
+    "id": "A4_REF2",
+    "parentId": "A4_Q2",
+    "type": "reflection",
+    "text": "Your choices suggest a {axis4_style} approach to impact and perspective."
+  },
+
+  // ================= SUMMARY =================
+
+  {
+    "id": "SUMMARY",
+    "parentId": "A4_REF2",
+    "type": "summary",
+    "text": "You show {axis1_style} control, a {axis2_style} mindset, {axis3_style} contribution behavior, and a {axis4_style} perspective toward impact.",
+    "next": "END"
+  },
+
+  {
+    "id": "END",
+    "parentId": "SUMMARY",
+    "type": "end",
+    "text": "Thank you for reflecting on your work style."
+  }
+]
