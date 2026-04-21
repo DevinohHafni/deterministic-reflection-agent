@@ -96,8 +96,7 @@ No scoring model. No sentiment analysis. Just integer tallies and lookups.
 
 ```bash
 # Clone the repo
-git clone <your-repo-url>
-cd <repo-folder>
+git clone <(https://github.com/DevinohHafni/deterministic-reflection-agent/)>
 
 # Run
 python agent.py decision_tree.json
